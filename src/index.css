@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+:root {
+  --accent-h: 150; /* default emerald green hue */
+  --accent-s: 75%;
+  --accent-l: 50%;
+  --accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+  --accent-hover: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 8%));
+  --accent-rgb: 16, 185, 129; /* Fallback */
+}
+
+/* Map Tailwind emerald styles to the dynamic HSL accent variable */
+.text-emerald-300,
+.text-emerald-400,
+.text-emerald-500,
+.text-emerald-600 {
+  color: var(--accent) !important;
+}
+
+.bg-emerald-500,
+.bg-emerald-400,
+.bg-emerald-555 {
+  background-color: var(--accent) !important;
+}
+
+.bg-emerald-500\/10,
+.bg-emerald-500\/15,
+.bg-emerald-500\/20,
+.bg-emerald-500\/25,
+.hover\:bg-emerald-500\/25:hover,
+.hover\:bg-emerald-500\/20:hover {
+  background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.15) !important;
+}
+
+.border-emerald-500\/10,
+.border-emerald-500\/20,
+.border-emerald-500\/30,
+.border-emerald-550\/20,
+.border-emerald-600\/30 {
+  border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.3) !important;
+}
+
+.fill-emerald-400,
+.fill-emerald-500 {
+  fill: var(--accent) !important;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    background-color: #080808; /* Soft deep pitch black */
+    color: #e0e0e0; /* Premium high-contrast silver grey text */
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: var(--accent) !important;
+    color: #000000 !important;
+  }
+}
+
+/* Custom premium transitions and subtle styles */
+.text-stroke-accent {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  color: transparent;
+}
+
+/* Hide scrollbar for clean layout sliders */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* -----------------------------------------
+   PREMIUM LIGHT MODE OVERRIDES
+   ----------------------------------------- */
+body.light-mode {
+  background-color: #FAF9F6 !important; /* Exquisite antique white / soft warm ivory gallery canvas */
+  color: #1a1a20 !important;
+}
+
+/* Base text color overrides for readability key indicators */
+body.light-mode *:not(.keep-dark):not(.keep-dark *) {
+  /* Dynamic transitions for fluid switches */
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.1s ease;
+}
+
+/* Headers */
+body.light-mode header {
+  background-color: rgba(250, 249, 246, 0.9) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.02);
+}
+
+body.light-mode header button:not(.theme-toggle),
+body.light-mode header span:not(.theme-toggle *),
+body.light-mode header a {
+  color: #1a1a20 !important;
+}
+
+body.light-mode header .text-white\/45,
+body.light-mode header .text-white\/40,
+body.light-mode header .text-white\/30,
+body.light-mode header .text-white\/20,
+body.light-mode header .text-white\/50 {
+  color: rgba(26, 26, 32, 0.55) !important;
+}
+
+body.light-mode .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.045) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .text-white\/90,
+body.light-mode .text-white\/85,
+body.light-mode .text-white\/80 {
+  color: #0b0b0d !important; /* Extreme high contrast solid obsidian ink */
+}
+
+body.light-mode .text-white\/70,
+body.light-mode .text-white\/65,
+body.light-mode .text-white\/60,
+body.light-mode .text-zinc-200,
+body.light-mode .text-zinc-300 {
+  color: #16161a !important; /* Rich deep charcoal for clear paragraphs */
+}
+
+body.light-mode .text-white\/50,
+body.light-mode .text-white\/45,
+body.light-mode .text-white\/40,
+body.light-mode .text-white\/30,
+body.light-mode .text-zinc-400,
+body.light-mode .text-zinc-500 {
+  color: #272732 !important; /* Dense carbon color for secondary tags and details */
+}
+
+body.light-mode .border-white\/10,
+body.light-mode .border-white\/5,
+body.light-mode .border-white\/15,
+body.light-mode .border-zinc-800 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode section {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .bg-white\/\[0\.02\] {
+  background-color: rgba(0, 0, 0, 0.015) !important;
+}
+
+/* Service cards & info panels */
+body.light-mode .bg-\[\#121212\]\/40,
+body.light-mode .bg-\[\#121212\]\/30,
+body.light-mode .bg-[#121215]/80,
+body.light-mode .bg-zinc-900\/40,
+body.light-mode .bg-zinc-950\/80 {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02) !important;
+}
+
+body.light-mode .hover\:border-white\/15:hover {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6,
+body.light-mode .text-white {
+  color: #121215 !important;
+}
+
+/* Ensure background of sections like Projects and Testimonials switch beautifully */
+body.light-mode .bg-[#080808],
+body.light-mode .bg-[#0a0a0c],
+body.light-mode .bg-[#08080a] {
+  background-color: #FAF9F6 !important;
+}
+
+/* Categories Filter Buttons */
+body.light-mode .bg-zinc-950\/80 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+body.light-mode .bg-zinc-950 p-2.5 {
+  color: #1a1a20 !important;
+}
+
+/* References cards in Testimonials */
+body.light-mode .bg-\[\#121212\]\/30 {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Buttons and Links */
+body.light-mode a.text-white,
+body.light-mode button.text-white\/60,
+body.light-mode button.text-white {
+  color: #1a1a20 !important;
+}
+
+body.light-mode a.text-white:hover,
+body.light-mode button:hover {
+  color: #000000 !important;
+}
+
+body.light-mode .bg-blue-950\/25,
+body.light-mode .bg-blue-950\/20 {
+  background-color: rgba(37, 99, 235, 0.07) !important;
+  color: #1d4ed8 !important;
+}
+
+/* Keep original beautiful neon accents readable under high contrast light backgrounds */
+body.light-mode .text-emerald-400 {
+  color: #059669 !important; /* Deep emerald */
+}
+
+body.light-mode .text-blue-400,
+body.light-mode .text-blue-450 {
+  color: #1d4ed8 !important; /* Rich blue hook */
+}
+
+body.light-mode .text-cyan-400 {
+  color: #0891b2 !important; /* Balanced cyan */
+}
+
+body.light-mode .text-amber-500 {
+  color: #d97706 !important; /* Deep warm amber */
+}
+
+body.light-mode .text-zinc-650 {
+  color: #4b5563 !important;
+}
+
+/* Target specific components like Case Study Details container to use pristine backgrounds */
+body.light-mode .bg-\[\#121212\]\/80 {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Footer Rules overrides */
+body.light-mode footer {
+  background-color: #f2f1ec !important; /* slightly darker gallery sand to ground the layout */
+  border-top-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+body.light-mode footer .bg-\[\#121212\]\/85 {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-mode footer button,
+body.light-mode footer a,
+body.light-mode footer span {
+  color: #1a1a20 !important;
+}
+
+body.light-mode footer .text-white\/35,
+body.light-mode footer .text-white\/30,
+body.light-mode footer .text-white\/40,
+body.light-mode footer .text-white\/60,
+body.light-mode footer .text-white\/50 {
+  color: #555562 !important;
+}
+
+/* -----------------------------------------
+   SYSTEM TERMINALS (RESPONSIVE IN LIGHT MODE)
+   ----------------------------------------- */
+.system-terminal {
+  background-color: #0a0a0c !important;
+  color: #d4d4d8 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.system-terminal * {
+  /* Inherit defaults for dark terminal simulator */
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+.system-terminal .text-emerald-400 {
+  color: #34d399 !important; /* Neon green terminal output */
+}
+
+.system-terminal .text-amber-400 {
+  color: #fbbf24 !important; /* Sunny amber terminal text */
+}
+
+.system-terminal .text-blue-400 {
+  color: #60a5fa !important;
+}
+
+.system-terminal .text-cyan-400 {
+  color: #22d3ee !important;
+}
+
+.system-terminal input {
+  color: #f4f4f5 !important;
+  background-color: transparent !important;
+}
+
+.system-terminal span.text-zinc-650 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.system-terminal button {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.system-terminal button:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: #08080a !important;
+}
+
+/* HIGH-CONTRAST LIGHT MODE TERMINAL THEME OVERRIDES */
+body.light-mode .system-terminal {
+  background-color: #ffffff !important;
+  color: #121215 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.light-mode .system-terminal * {
+  color: inherit !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .system-terminal .bg-\[\#121215\],
+body.light-mode .system-terminal .bg-\[\#121215\]\/80 {
+  background-color: #f4f3ef !important; /* soft antique white paneling */
+}
+
+body.light-mode .system-terminal .bg-\[\#08080a\] {
+  background-color: #faf9f6 !important; /* warm paper terminal dashboard */
+}
+
+body.light-mode .system-terminal .bg-\[\#0b0b0e\] {
+  background-color: #f4f3ef !important;
+}
+
+body.light-mode .system-terminal .text-zinc-300 {
+  color: #1a1a20 !important;
+}
+
+body.light-mode .system-terminal .text-zinc-400 {
+  color: #272732 !important;
+}
+
+body.light-mode .system-terminal .text-zinc-500 {
+  color: #4b5563 !important;
+}
+
+body.light-mode .system-terminal .text-zinc-650 {
+  color: #4b5563 !important;
+}
+
+body.light-mode .system-terminal .text-white\/30 {
+  color: rgba(26, 26, 32, 0.45) !important;
+}
+
+body.light-mode .system-terminal .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.045) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .system-terminal input {
+  color: #1a1a20 !important;
+}
+
+body.light-mode .system-terminal input::placeholder {
+  color: #71717a !important;
+}
+
+body.light-mode .system-terminal .text-emerald-400 {
+  color: #059669 !important; /* deep primary emerald prompt indicator */
+}
+
+body.light-mode .system-terminal .text-amber-400 {
+  color: #b45309 !important; /* high-contrast dark amber output */
+}
+
+body.light-mode .system-terminal .text-blue-400 {
+  color: #1d4ed8 !important;
+}
+
+body.light-mode .system-terminal .text-cyan-400 {
+  color: #0369a1 !important;
+}
+
+body.light-mode .system-terminal .text-red-400 {
+  color: #b91c1c !important;
+}
+
+body.light-mode .system-terminal button {
+  color: #272732 !important;
+}
+
+body.light-mode .system-terminal button:hover {
+  background-color: #1a1a20 !important;
+  color: #ffffff !important;
+}
+
+/* -----------------------------------------
+   SCROLL TO TOP HIGH CONTRAST UTILITIES
+   ----------------------------------------- */
+.scroll-to-top-btn {
+  background-color: #121215 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.light-mode .scroll-to-top-btn {
+  background-color: #1a1a20 !important;
+  color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+.scroll-to-top-btn:hover {
+  background-color: #27272a !important;
+}
+
+body.light-mode .scroll-to-top-btn:hover {
+  background-color: #2e2e38 !important;
+}
+
+.arrow-icon-white,
+body.light-mode .scroll-to-top-btn .arrow-icon-white {
+  color: #ffffff !important;
+}
+
+/* -----------------------------------------
+   MOBILE NAV DRAWER LIGHT MODE OVERRIDES
+   ----------------------------------------- */
+body.light-mode .mobile-nav-drawer {
+  background-color: #FAF9F6 !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+  color: #1a1a20 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .mobile-nav-drawer button,
+body.light-mode .mobile-nav-drawer a {
+  color: #1a1a20 !important;
+}
+
+body.light-mode .mobile-nav-drawer .text-white\/40 {
+  color: rgba(26, 26, 32, 0.5) !important;
+}
+
+body.light-mode .mobile-nav-drawer .text-white\/50,
+body.light-mode .mobile-nav-drawer .text-white\/60 {
+  color: rgba(26, 26, 32, 0.65) !important;
+}
+
+body.light-mode .mobile-nav-drawer .bg-zinc-900\/60 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-mode #download-cv-mobile-btn {
+  background-color: rgba(5, 150, 105, 0.08) !important;
+  border-color: rgba(5, 150, 105, 0.25) !important;
+  color: #059669 !important;
+}
+
+body.light-mode #download-cv-mobile-btn:hover {
+  background-color: rgba(5, 150, 105, 0.12) !important;
+}
+
+body.light-mode #download-cv-hero-btn {
+  background-color: rgba(5, 150, 105, 0.08) !important;
+  border-color: rgba(5, 150, 105, 0.3) !important;
+  color: #059669 !important;
+}
+
+body.light-mode #download-cv-hero-btn:hover {
+  background-color: rgba(5, 150, 105, 0.12) !important;
+}
+
+
