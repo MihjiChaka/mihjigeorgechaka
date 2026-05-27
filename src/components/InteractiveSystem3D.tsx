@@ -765,7 +765,7 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
       </div>
 
       {/* 6-Node Selector Tabs Row */}
-      <div className={`absolute top-[46px] left-4 right-4 z-20 flex justify-between gap-1 overflow-x-auto pb-1 no-scrollbar border-b pointer-events-auto select-none ${
+      <div className={`absolute top-[46px] left-4 right-4 z-20 grid grid-cols-3 sm:flex sm:flex-nowrap sm:justify-between gap-1.5 pb-2 border-b pointer-events-auto select-none ${
         isLight ? "border-zinc-200" : "border-white/5"
       }`}>
         {NODES_EXPLANATION.map((node, i) => {
@@ -774,17 +774,17 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
             <button
               key={node.name}
               onClick={() => selectNode(i)}
-              className={`flex items-center gap-1 px-2 py-1 rounded-full text-[8.5px] font-mono tracking-tight uppercase cursor-pointer transition-all duration-300 border shrink-0 ${
+              className={`flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-full text-[8.5px] xs:text-[9px] sm:text-[8.5px] font-mono tracking-tight uppercase cursor-pointer transition-all duration-300 border ${
                 isActive
                   ? isLight
-                    ? `${node.lightTextBg} font-bold scale-102 shadow-xs border-${node.color}/30`
-                    : `${node.textBg} font-bold scale-102 shadow-xs border-${node.color}/30`
+                    ? `${node.lightTextBg} font-extrabold shadow-sm border-emerald-500/30`
+                    : `${node.textBg} font-extrabold shadow-sm border-emerald-400/30`
                   : isLight
-                    ? "bg-zinc-100/90 text-zinc-500 border-zinc-200 hover:text-zinc-800 hover:bg-zinc-200/50"
-                    : "bg-black/45 text-white/40 border-white/5 hover:text-white/70 hover:bg-black/60"
+                    ? "bg-zinc-150/80 text-zinc-600 border-zinc-200 hover:text-zinc-800 hover:bg-zinc-200"
+                    : "bg-black/35 text-white/45 border-white/5 hover:text-white/75 hover:bg-black/55"
               }`}
             >
-              <span className={`w-1 h-1 rounded-full ${node.dotColor} ${isActive ? "animate-pulse" : ""}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${node.dotColor} ${isActive ? "animate-pulse" : ""}`} />
               <span>{node.name}</span>
             </button>
           );
