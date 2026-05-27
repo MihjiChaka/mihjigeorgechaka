@@ -143,7 +143,7 @@ function SkillTagWithTooltip({ tag }: SkillTagWithTooltipProps) {
       </span>
       
       {/* Tooltip Popup container */}
-      <div className="experience-tooltip-container absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 scale-90 opacity-0 pointer-events-none group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 ease-out origin-bottom select-none">
+      <div className="experience-tooltip-container absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 scale-90 opacity-0 pointer-events-none group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 ease-out origin-bottom select-none hidden md:block">
         <div className="experience-tooltip-bubble bg-[#121212]/95 backdrop-blur-md border border-white/10 text-[10px] text-white/70 py-2 px-3 rounded-lg shadow-2xl text-center leading-relaxed relative">
           <p className="experience-tooltip-tag font-mono font-bold text-emerald-400 text-[8px] uppercase tracking-widest mb-1">{tag}</p>
           <p className="experience-tooltip-desc font-sans font-normal text-white/80">{description}</p>

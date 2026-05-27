@@ -166,7 +166,7 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
     const rootGroup = new THREE.Group();
     const isMobileInitial = width < 500;
     let isMobileLocal = isMobileInitial;
-    rootGroup.position.y = isMobileInitial ? 1.30 : 1.35; // Positioned slightly down on mobile to give ample negative space under top buttons
+    rootGroup.position.y = isMobileInitial ? -0.25 : 1.35; // Moved down on mobile (was 1.30) to give plenty of space and prevent overlaps with options
     const initialScale = isMobileInitial ? 0.53 : 0.85; // Slightly reduced scale on mobile to give ample border margin
     rootGroup.scale.set(initialScale, initialScale, initialScale);
     scene.add(rootGroup);
@@ -624,7 +624,7 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
 
       if (!isDragging) {
         rootGroup.position.x += (cursorX * 0.4 - rootGroup.position.x) * 0.05;
-        const targetY = (isMobileLocal ? 1.30 : 1.35) + cursorY * (isMobileLocal ? 0.15 : 0.3);
+        const targetY = (isMobileLocal ? -0.25 : 1.35) + cursorY * (isMobileLocal ? 0.15 : 0.3);
         rootGroup.position.y += (targetY - rootGroup.position.y) * 0.05;
       }
 
