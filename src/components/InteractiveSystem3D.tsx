@@ -166,8 +166,8 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
     const rootGroup = new THREE.Group();
     const isMobileInitial = width < 500;
     let isMobileLocal = isMobileInitial;
-    rootGroup.position.y = isMobileInitial ? 1.70 : 1.35; // Slightly adjusted upward to give more breathing room to labels
-    const initialScale = isMobileInitial ? 0.62 : 0.85;
+    rootGroup.position.y = isMobileInitial ? 1.30 : 1.35; // Positioned slightly down on mobile to give ample negative space under top buttons
+    const initialScale = isMobileInitial ? 0.53 : 0.85; // Slightly reduced scale on mobile to give ample border margin
     rootGroup.scale.set(initialScale, initialScale, initialScale);
     scene.add(rootGroup);
 
@@ -258,11 +258,13 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
       // Create visual orbital trajectory ring
       const orbitPoints: THREE.Vector3[] = [];
       const segments = 64;
+      const tiltYRing = isMobileInitial ? 0.32 : 0.65; // Much flatter orbital disks on mobile prevents lower satellites colliding with bottom card
+      const tiltZRing = isMobileInitial ? 0.25 : 0.45;
       for (let s = 0; s <= segments; s++) {
         const theta = (s / segments) * Math.PI * 2;
         const ox = Math.cos(theta) * data.orbitRadius;
-        const oy = Math.sin(theta) * data.orbitRadius * 0.65;
-        const oz = Math.sin(theta + idx * Math.PI / 4) * data.orbitRadius * 0.45;
+        const oy = Math.sin(theta) * data.orbitRadius * tiltYRing;
+        const oz = Math.sin(theta + idx * Math.PI / 4) * data.orbitRadius * tiltZRing;
         orbitPoints.push(new THREE.Vector3(ox, oy, oz));
       }
       const orbitGeo = new THREE.BufferGeometry().setFromPoints(orbitPoints);
@@ -364,9 +366,13 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
     let cursorY = 0;
 
     const handlePointerDown = (e: MouseEvent | TouchEvent) => {
+      if ("touches" in e) {
+        // Bypass touch drag rotations entirely on mobile to prioritize default pages scrolling of the portfolio!
+        return;
+      }
       isDragging = true;
-      const clientX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-      const clientY = "touches" in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
+      const clientX = (e as MouseEvent).clientX;
+      const clientY = (e as MouseEvent).clientY;
       previousMousePosition = { x: clientX, y: clientY };
     };
 
@@ -375,8 +381,11 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
     const mouse = new THREE.Vector2();
 
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
-      const clientX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-      const clientY = "touches" in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
+      if ("touches" in e) {
+        return; // Prioritize default pages scrolling on mobile, ignore drag hover
+      }
+      const clientX = (e as MouseEvent).clientX;
+      const clientY = (e as MouseEvent).clientY;
 
       const rect = container.getBoundingClientRect();
       const localX = clientX - rect.left;
@@ -459,7 +468,7 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
 
       // Support dynamic client-side adjustments during container width resizing
       isMobileLocal = w < 500;
-      const currentScale = isMobileLocal ? 0.62 : 0.85;
+      const currentScale = isMobileLocal ? 0.53 : 0.85;
       rootGroup.scale.set(currentScale, currentScale, currentScale);
     });
     resizeObserver.observe(container);
@@ -500,9 +509,12 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
       satellites.forEach((sat, idx) => {
         sat.angle += sat.speed * 0.008;
         
+        const tiltY = isMobileLocal ? 0.32 : 0.65; // Match custom flatter visual orbit plane on mobile
+        const tiltZ = isMobileLocal ? 0.25 : 0.45;
+
         sat.pos.x = Math.cos(sat.angle) * sat.orbitRadius;
-        sat.pos.y = Math.sin(sat.angle) * sat.orbitRadius * 0.65;
-        sat.pos.z = Math.sin(sat.angle + idx * Math.PI / 4) * sat.orbitRadius * 0.45;
+        sat.pos.y = Math.sin(sat.angle) * sat.orbitRadius * tiltY;
+        sat.pos.z = Math.sin(sat.angle + idx * Math.PI / 4) * sat.orbitRadius * tiltZ;
 
         const mesh = satelliteMeshes[idx];
         if (mesh) {
@@ -612,7 +624,7 @@ export function InteractiveSystem3D({ theme = "dark" }: InteractiveSystem3DProps
 
       if (!isDragging) {
         rootGroup.position.x += (cursorX * 0.4 - rootGroup.position.x) * 0.05;
-        const targetY = (isMobileLocal ? 1.70 : 1.35) + cursorY * (isMobileLocal ? 0.2 : 0.3);
+        const targetY = (isMobileLocal ? 1.30 : 1.35) + cursorY * (isMobileLocal ? 0.15 : 0.3);
         rootGroup.position.y += (targetY - rootGroup.position.y) * 0.05;
       }
 

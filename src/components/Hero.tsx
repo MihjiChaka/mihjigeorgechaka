@@ -120,7 +120,7 @@ export default function Hero({ theme = "dark" }: HeroProps) {
             {/* Visual glow backdrop decoration */}
             <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-500/10 to-purple-500/10 rounded-2xl blur-3xl z-0 animate-pulse" />
             
-            <div className={`relative z-10 w-full rounded-2xl border-4 shadow-2xl overflow-hidden h-[510px] xs:h-[530px] sm:h-[550px] md:h-auto md:aspect-square transition-all duration-300 ${
+            <div className={`relative z-10 w-full rounded-2xl border-4 shadow-2xl overflow-hidden h-[590px] xs:h-[620px] sm:h-[640px] md:h-auto md:aspect-square transition-all duration-300 ${
               theme === "light" 
                 ? "border-black/5 bg-[#ffffff] shadow-lg shadow-black/5" 
                 : "border-white/10 bg-zinc-950"

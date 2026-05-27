@@ -87,7 +87,8 @@ export function DataStreamFlow({ theme = "dark" }: { theme?: "dark" | "light" })
     canvasHolder.appendChild(renderer.domElement);
 
     // 4. Generate random coordinate particles (data nodes)
-    const particlesCount = 200;
+    const isMobileDevice = window.innerWidth < 768;
+    const particlesCount = isMobileDevice ? 45 : 200;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particlesCount * 3);
     const initialPositions = new Float32Array(particlesCount * 3);
@@ -247,7 +248,7 @@ export function DataStreamFlow({ theme = "dark" }: { theme?: "dark" | "light" })
       opacity: isLight ? 0.12 : 0.05,
     });
 
-    const maxConnections = 140;
+    const maxConnections = isMobileDevice ? 30 : 140;
     const lineGeometry = new THREE.BufferGeometry();
     const linePositions = new Float32Array(maxConnections * 2 * 3);
     lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
