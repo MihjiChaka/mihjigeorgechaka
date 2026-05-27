@@ -244,7 +244,7 @@ export default function ProjectList() {
                       {/* Read Case Study Case details */}
                       <button
                         onClick={() => toggleProjectExpansion(project.id)}
-                        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider font-bold text-white/80 hover:text-white bg-white/5 hover:bg-white/10 active:bg-white/15 border border-white/10 px-4 py-3 rounded-lg transition-all cursor-pointer min-h-[44px]"
+                        className="hidden lg:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider font-bold text-white/80 hover:text-white bg-white/5 hover:bg-white/10 active:bg-white/15 border border-white/10 px-4 py-3 rounded-lg transition-all cursor-pointer min-h-[44px]"
                       >
                         {isExpanded ? (
                           <>
