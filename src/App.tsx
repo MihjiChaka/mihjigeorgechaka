@@ -12,11 +12,28 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    // Check localStorage or default to dark
+    const saved = localStorage.getItem("theme");
+    return saved === "light" ? "light" : "dark";
+  });
+
   // Load and apply theme on mount
   useEffect(() => {
-    // Force dark mode active layout
-    document.body.classList.remove("light-mode");
-  }, []);
+    if (theme === "light") {
+      document.body.classList.add("light-mode");
+    } else {
+      document.body.classList.remove("light-mode");
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      const nextTheme = prev === "light" ? "dark" : "light";
+      localStorage.setItem("theme", nextTheme);
+      return nextTheme;
+    });
+  };
 
   // Smooth navigation to scroll targets
   const handleNavigate = (sectionId: string) => {
@@ -102,12 +119,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between transition-colors duration-300 bg-[#080808] text-[#e0e0e0]">
+    <div className={`min-h-screen flex flex-col justify-between transition-colors duration-300 ${theme === "light" ? "bg-[#FAF9F6] text-[#1a1a20]" : "bg-[#080808] text-[#e0e0e0]"}`}>
       
       {/* Dynamic Navigation Header */}
       <Header
         activeSection={activeSection}
         onNavigate={handleNavigate}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       {/* Main Container */}
@@ -115,7 +134,7 @@ export default function App() {
         
         {/* Hero Banner Grid Section */}
         <div id="hero">
-          <Hero />
+          <Hero theme={theme} />
         </div>
 
         {/* Services & Quick Stats Metric Columns */}

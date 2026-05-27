@@ -5,8 +5,13 @@ import TerminalSimulator from "./TerminalSimulator";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowDownRight, Database, Network, Code2, Download } from "lucide-react";
 import { generateCV } from "../utils/cvGenerator";
+import { DataStreamFlow } from "./DataStreamFlow";
 
-export default function Hero() {
+interface HeroProps {
+  theme?: "dark" | "light";
+}
+
+export default function Hero({ theme = "dark" }: HeroProps) {
   const words = ["FULL STACK", "DATABASES", "WEB APPS", "AUTOMATION", "NETWORKS", "CLOUD DEPS"];
   const [index, setIndex] = useState(0);
 
@@ -19,27 +24,28 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="pt-28 md:pt-40 pb-20 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <section className="relative pt-10 md:pt-12 pb-8 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+      <DataStreamFlow theme={theme} />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-11 items-start relative z-10">
         
         {/* Left Column: Introductions & Terminal Core */}
-        <div className="lg:col-span-7 space-y-8">
+        <div className="lg:col-span-6 space-y-6">
           
           {/* Subtitle intro label */}
-          <div className="inline-flex items-center gap-2 bg-white/5 rounded-full py-1.5 px-3 border border-white/10">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono text-[10px] uppercase tracking-widest text-white/70 font-bold">
+          <div className="inline-flex items-center gap-2 bg-white/5 rounded-full py-1 px-3 border border-white/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-mono text-[9.5px] uppercase tracking-widest text-white/70 font-bold">
               Systems Architect & Secure Automator
             </span>
           </div>
 
           {/* Heading */}
-          <div className="space-y-4">
-            <p className="font-sans text-lg tracking-wide text-white/50 font-medium">
+          <div className="space-y-3">
+            <p className="font-sans text-base tracking-wide text-white/50 font-medium">
               Hi there! This is <span className="text-white font-semibold">{DEFAULT_BIO.name}</span>
             </p>
             
-            <h1 className="font-serif italic font-light text-4xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] text-white tracking-tighter">
+            <h1 className="font-serif italic font-light text-3xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] text-white tracking-tighter">
               Robust code <br />
               and pipeline <br />
               <div className="h-[1.25em] relative block w-full overflow-hidden align-bottom pb-1">
@@ -50,7 +56,7 @@ export default function Hero() {
                     animate={{ y: 0, opacity: 1, rotateX: 0 }}
                     exit={{ y: -50, opacity: 0, rotateX: 60 }}
                     transition={{ duration: 0.45, ease: "easeOut" }}
-                    className="absolute left-0 text-white font-bold not-italic hover:text-white/80 transition duration-300 underline decoration-white/20 underline-offset-8 whitespace-nowrap text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] xl:text-[5.5rem]"
+                    className="absolute left-0 text-white font-bold not-italic hover:text-white/80 transition duration-300 underline decoration-white/20 underline-offset-8 whitespace-nowrap text-2xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4.5rem]"
                   >
                     {words[index]}
                   </motion.span>
@@ -60,48 +66,48 @@ export default function Hero() {
           </div>
 
           {/* Description */}
-          <p className="text-white/70 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+          <p className="text-white/70 text-sm md:text-base max-w-xl font-normal leading-relaxed">
             {DEFAULT_BIO.subBio}
           </p>
 
           {/* Core Services badges or pillars */}
-          <div className="flex flex-wrap gap-4 pt-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-white/80 border border-white/10 bg-zinc-900/40 shadow-xs px-3 py-1.5 rounded-lg">
+          <div className="flex flex-wrap gap-3 pt-1">
+            <div className="flex items-center gap-2 text-[11px] font-mono text-white/80 border border-white/10 bg-zinc-900/40 shadow-xs px-2.5 py-1.5 rounded-lg">
               <Database className="w-3.5 h-3.5 text-zinc-400" />
               <span>SQL & ETL Pipelines</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-white/80 border border-white/10 bg-zinc-900/40 shadow-xs px-3 py-1.5 rounded-lg">
+            <div className="flex items-center gap-2 text-[11px] font-mono text-white/80 border border-white/10 bg-zinc-900/40 shadow-xs px-2.5 py-1.5 rounded-lg">
               <Code2 className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
               <span>Multi-Stack API Backends</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-white/80 border border-white/10 bg-zinc-900/40 shadow-xs px-3 py-1.5 rounded-lg">
+            <div className="flex items-center gap-2 text-[11px] font-mono text-white/80 border border-white/10 bg-zinc-900/40 shadow-xs px-2.5 py-1.5 rounded-lg">
               <Network className="w-3.5 h-3.5 text-emerald-400" />
               <span>CCNP Network Security</span>
             </div>
           </div>
 
           {/* Interactive Shell Terminal Panel */}
-          <div className="pt-2">
+          <div className="pt-1">
             <TerminalSimulator />
           </div>
 
           {/* Call to action arrow and CV download button */}
-          <div className="pt-2 flex flex-wrap items-center gap-6">
+          <div className="pt-1 flex flex-wrap items-center gap-5">
             <a
               href="#projects"
-              className="group flex items-center gap-2 font-mono text-xs uppercase tracking-wider font-semibold text-white/80 hover:text-white transition duration-300"
+              className="group flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider font-semibold text-white/80 hover:text-white transition duration-300"
             >
               <span>Explore Staged Deployments</span>
-              <ArrowDownRight className="w-4 h-4 transform group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300 bg-zinc-800 rounded-full p-0.5" />
+              <ArrowDownRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300 bg-zinc-800 rounded-full p-0.5" />
             </a>
 
             <button
               id="download-cv-hero-btn"
               onClick={generateCV}
               type="button"
-              className="inline-flex items-center gap-2 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 hover:text-emerald-300 font-mono text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-lg transition-all active:scale-95 cursor-pointer shadow-md shadow-emerald-950/10"
+              className="inline-flex items-center gap-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 hover:text-emerald-300 font-mono text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 cursor-pointer shadow-md shadow-emerald-950/10"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-3 h-3" />
               <span>Download CV</span>
             </button>
           </div>
@@ -109,13 +115,17 @@ export default function Hero() {
         </div>
 
         {/* Right Column: Premium Monogram/Avatar */}
-        <div className="lg:col-span-5 flex justify-center lg:sticky lg:top-24">
-          <div className="w-full max-w-[340px] md:max-w-[380px] shadow-2xl relative">
+        <div className="lg:col-span-6 flex justify-center lg:sticky lg:top-[75px] w-full">
+          <div className="w-full max-w-[480px] lg:max-w-[540px] xl:max-w-[580px] shadow-2xl relative">
             {/* Visual glow backdrop decoration */}
-            <div className="absolute -inset-1.5 bg-white/5 rounded-2xl blur-2xl z-0" />
+            <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-500/10 to-purple-500/10 rounded-2xl blur-3xl z-0 animate-pulse" />
             
-            <div className="relative z-10 w-full rounded-2xl border-4 border-white/10 bg-zinc-950 shadow-2xl overflow-hidden aspect-square">
-              <AvatarDefault />
+            <div className={`relative z-10 w-full rounded-2xl border-4 shadow-2xl overflow-hidden h-[510px] xs:h-[530px] sm:h-[550px] md:h-auto md:aspect-square transition-all duration-300 ${
+              theme === "light" 
+                ? "border-black/5 bg-[#ffffff] shadow-lg shadow-black/5" 
+                : "border-white/10 bg-zinc-950"
+            }`}>
+              <AvatarDefault theme={theme} />
             </div>
           </div>
         </div>

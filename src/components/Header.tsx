@@ -7,9 +7,11 @@ import { generateCV } from "../utils/cvGenerator";
 interface HeaderProps {
   activeSection: string;
   onNavigate: (sectionId: string) => void;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
 }
 
-export default function Header({ activeSection, onNavigate }: HeaderProps) {
+export default function Header({ activeSection, onNavigate, theme, onToggleTheme }: HeaderProps) {
   const [greeting, setGreeting] = useState("Good morning!");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -99,6 +101,27 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
               ))}
             </div>
 
+            {/* Custom Interactive Theme Toggle Switch */}
+            <button
+              onClick={onToggleTheme}
+              className="theme-toggle relative w-12 h-6.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center p-1 cursor-pointer transition-all duration-300 focus:outline-hidden select-none"
+              aria-label="Toggle visual theme"
+            >
+              <motion.div
+                className="w-4.5 h-4.5 rounded-full bg-white flex items-center justify-center shadow-md cursor-pointer"
+                animate={{
+                  x: theme === "light" ? 20 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 500, damping: 28 }}
+              >
+                {theme === "light" ? (
+                  <Sun className="w-3 h-3 text-amber-500 fill-amber-500/20" />
+                ) : (
+                  <Moon className="w-3 h-3 text-zinc-950 fill-zinc-950" />
+                )}
+              </motion.div>
+            </button>
+
             <a
               href="mailto:hello@mihjichaka.design"
               className="px-4 py-2 bg-white hover:bg-zinc-200 text-neutral-950 font-mono text-xs uppercase tracking-wider rounded-lg transition-all active:scale-95 duration-200 flex items-center gap-2 shadow-sm"
@@ -109,7 +132,19 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           </div>
 
           {/* Mobile Right Controls */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-1.5 md:hidden">
+            {/* Quick-access Theme Toggle Button on Mobile */}
+            <button
+              onClick={onToggleTheme}
+              className="theme-toggle p-2 text-white/80 hover:text-white cursor-pointer select-none"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? (
+                <Sun className="w-5.5 h-5.5 text-amber-500 fill-amber-500/20" />
+              ) : (
+                <Moon className="w-5.5 h-5.5 text-white/80" />
+              )}
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-white hover:text-white/80 cursor-pointer"

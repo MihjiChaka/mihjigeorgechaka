@@ -221,7 +221,7 @@ export default function SecureShellTerminal({ project }: SecureShellTerminalProp
         />
         <button
           onClick={() => executeCommand(inputValue)}
-          className="p-1 px-2 hover:bg-white hover:text-[#08080a] rounded text-zinc-500 hover:text-[#08080a] transition uppercase text-[10px] font-bold tracking-widest flex items-center gap-1 cursor-pointer"
+          className="terminal-run-btn p-1 px-2 hover:bg-white hover:text-[#08080a] rounded text-zinc-500 hover:text-[#08080a] transition uppercase text-[10px] font-bold tracking-widest flex items-center gap-1 cursor-pointer"
         >
           <Play className="w-3 h-3 text-emerald-400 fill-emerald-400" />
           <span>RUN</span>
@@ -238,7 +238,7 @@ export default function SecureShellTerminal({ project }: SecureShellTerminalProp
           <button
             key={btn}
             onClick={() => executeCommand(btn)}
-            className="px-2.5 py-1 bg-white/5 hover:bg-white hover:text-[#080a0c] rounded-md text-zinc-400 border border-white/5 cursor-pointer text-[10px] tracking-wide font-sans hover:-translate-y-0.5 transition active:translate-y-0 duration-200"
+            className="terminal-command-btn px-2.5 py-1 bg-white/5 hover:bg-white hover:text-[#080a0c] rounded-md text-zinc-400 border border-white/5 cursor-pointer text-[10px] tracking-wide font-sans hover:-translate-y-0.5 transition active:translate-y-0 duration-200"
           >
             {btn}
           </button>

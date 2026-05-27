@@ -1,4 +1,5 @@
 import React from "react";
+import { InteractiveSystem3D } from "./InteractiveSystem3D";
 
 export function GoodNatureAgroDefault() {
   return (
@@ -250,28 +251,15 @@ export function ImpactEnterprisesDefault() {
   );
 }
 
-export function AvatarDefault() {
+export function AvatarDefault({ theme }: { theme?: "dark" | "light" }) {
+  const isLight = theme === "light";
   return (
-    <div className="w-full h-full bg-gradient-to-tr from-[#0a0a0c] to-[#121215] flex flex-col justify-center items-center p-8 select-none relative overflow-hidden rounded-xl border border-white/5">
-      {/* Decorative fine rotating grid circles */}
-      <div className="absolute inset-0 border-[0.5px] border-white/5 m-8 rounded-full opacity-30 animate-pulse" />
-      <div className="absolute inset-x-0 top-1/2 h-[0.5px] bg-white/5" />
-      <div className="absolute inset-y-0 left-1/2 w-[0.5px] bg-white/5" />
-      
-      {/* Monogram emblem */}
-      <div className="relative z-10 flex flex-col items-center">
-        <div className="w-24 h-24 rounded-full bg-[#121212] flex items-center justify-center border-4 border-white/10 shadow-2xl relative">
-          <span className="font-mono font-extrabold text-3xl text-white tracking-widest pl-1">MGC</span>
-          {/* Absolute decorative tiny online cursor */}
-          <div className="absolute right-3 bottom-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-zinc-950 animate-pulse" />
-        </div>
-        
-        {/* Name coordinates */}
-        <h3 className="mt-4 font-mono text-white tracking-widest font-bold text-sm uppercase">Mihji G. Chaka</h3>
-        <p className="font-mono text-[8.5px] text-emerald-400 font-bold uppercase tracking-widest mt-1.5 px-2 py-0.5 bg-emerald-950/40 border border-emerald-500/20 rounded">
-          Full Stack Developer & Systems Architect
-        </p>
-      </div>
+    <div className={`w-full h-full flex flex-col justify-center items-center select-none relative overflow-hidden rounded-xl border transition-all duration-300 ${
+      isLight 
+        ? "bg-gradient-to-tr from-[#fbfbfa] to-[#f4f3ef] border-zinc-200/80" 
+        : "bg-gradient-to-tr from-[#0a0a0c] to-[#121215] border-white/5"
+    }`}>
+      <InteractiveSystem3D theme={theme} />
     </div>
   );
 }

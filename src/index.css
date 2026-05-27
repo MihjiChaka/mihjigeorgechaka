@@ -161,6 +161,17 @@ body.light-mode .bg-white\/\[0\.02\] {
   background-color: rgba(0, 0, 0, 0.015) !important;
 }
 
+body.light-mode .bg-\[\#0f0f12\]\/60 {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.01) !important;
+}
+
+body.light-mode .bg-zinc-950:not(.keep-dark):not(.keep-dark *) {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
 /* Service cards & info panels */
 body.light-mode .bg-\[\#121212\]\/40,
 body.light-mode .bg-\[\#121212\]\/30,
@@ -176,13 +187,13 @@ body.light-mode .hover\:border-white\/15:hover {
   border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-body.light-mode h1,
-body.light-mode h2,
-body.light-mode h3,
-body.light-mode h4,
-body.light-mode h5,
-body.light-mode h6,
-body.light-mode .text-white {
+body.light-mode h1:not(.keep-dark):not(.keep-dark *),
+body.light-mode h2:not(.keep-dark):not(.keep-dark *),
+body.light-mode h3:not(.keep-dark):not(.keep-dark *),
+body.light-mode h4:not(.keep-dark):not(.keep-dark *),
+body.light-mode h5:not(.keep-dark):not(.keep-dark *),
+body.light-mode h6:not(.keep-dark):not(.keep-dark *),
+body.light-mode .text-white:not(.keep-dark):not(.keep-dark *) {
   color: #121215 !important;
 }
 
@@ -211,14 +222,14 @@ body.light-mode .bg-\[\#121212\]\/30 {
 }
 
 /* Buttons and Links */
-body.light-mode a.text-white,
-body.light-mode button.text-white\/60,
-body.light-mode button.text-white {
+body.light-mode a.text-white:not(.keep-dark):not(.keep-dark *),
+body.light-mode button.text-white\/60:not(.keep-dark):not(.keep-dark *),
+body.light-mode button.text-white:not(.keep-dark):not(.keep-dark *) {
   color: #1a1a20 !important;
 }
 
-body.light-mode a.text-white:hover,
-body.light-mode button:hover {
+body.light-mode a.text-white:hover:not(.keep-dark):not(.keep-dark *),
+body.light-mode button:hover:not(.keep-dark):not(.keep-dark *) {
   color: #000000 !important;
 }
 
@@ -246,6 +257,10 @@ body.light-mode .text-amber-500 {
   color: #d97706 !important; /* Deep warm amber */
 }
 
+body.light-mode .text-white\/20 {
+  color: rgba(0, 0, 0, 0.06) !important;
+}
+
 body.light-mode .text-zinc-650 {
   color: #4b5563 !important;
 }
@@ -270,7 +285,10 @@ body.light-mode footer .bg-\[\#121212\]\/85 {
 
 body.light-mode footer button,
 body.light-mode footer a,
-body.light-mode footer span {
+body.light-mode footer h2,
+body.light-mode footer h4,
+body.light-mode footer span,
+body.light-mode footer li {
   color: #1a1a20 !important;
 }
 
@@ -339,9 +357,29 @@ body.light-mode .system-terminal {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
 }
 
-body.light-mode .system-terminal * {
+body.light-mode .system-terminal *:not(button):not(button *) {
   color: inherit !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .system-terminal button,
+body.light-mode .system-terminal button * {
+  color: #27273a !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+body.light-mode .system-terminal button {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .system-terminal button:hover {
+  background-color: #1a1a22 !important;
+}
+
+body.light-mode .system-terminal button:hover,
+body.light-mode .system-terminal button:hover * {
+  color: #ffffff !important;
 }
 
 body.light-mode .system-terminal .bg-\[\#121215\],
@@ -497,5 +535,125 @@ body.light-mode #download-cv-hero-btn {
 body.light-mode #download-cv-hero-btn:hover {
   background-color: rgba(5, 150, 105, 0.12) !important;
 }
+
+/* -----------------------------------------
+   LIGHT MODE TARGETED HOVER STATE OVERRIDES
+   ----------------------------------------- */
+body.light-mode .system-terminal button:hover,
+body.light-mode .system-terminal button:hover *,
+body.light-mode .system-terminal button.text-zinc-400:hover,
+body.light-mode .system-terminal button.text-zinc-405:hover,
+body.light-mode .system-terminal button.text-zinc-500:hover,
+body.light-mode .system-terminal button:hover .text-zinc-350,
+body.light-mode .system-terminal button:hover .text-zinc-400,
+body.light-mode .system-terminal button:hover .text-zinc-404,
+body.light-mode .system-terminal button:hover .text-zinc-405,
+body.light-mode .system-terminal button:hover .text-zinc-500,
+body.light-mode .system-terminal button:hover .text-emerald-400,
+body.light-mode .system-terminal button:hover .text-zinc-300,
+body.light-mode .system-terminal button:hover span,
+body.light-mode .system-terminal button:hover svg,
+body.light-mode .system-terminal button:hover svg * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+body.light-mode .system-terminal button:hover svg.fill-emerald-400,
+body.light-mode .system-terminal button:hover svg.fill-emerald-400 * {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Specific background and border change for terminal buttons on hover */
+body.light-mode .system-terminal button:hover {
+  background-color: #1a1a20 !important;
+  border-color: #1a1a20 !important;
+}
+
+/* Special hover state for secondary certs-all action button */
+body.light-mode .system-terminal button.bg-blue-950\/25:hover,
+body.light-mode .system-terminal button.text-blue-300:hover {
+  color: #ffffff !important;
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+/* -----------------------------------------
+   WORK EXPERIENCE TAGS STATE OVERRIDES (LIGHT MODE)
+   ----------------------------------------- */
+body.light-mode .experience-tag {
+  color: #272732 !important;
+  background-color: rgba(0, 0, 0, 0.045) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .experience-tag:hover {
+  color: #059669 !important; /* deep primary emerald font highlight on hover */
+  background-color: rgba(5, 150, 105, 0.08) !important; /* soft eye-safe emerald background */
+  border-color: rgba(5, 150, 105, 0.25) !important;
+}
+
+/* -----------------------------------------
+   WORK EXPERIENCE POPUP TOOLTIPS (LIGHT MODE)
+   ----------------------------------------- */
+body.light-mode .experience-tooltip-bubble {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .experience-tooltip-tag {
+  color: #059669 !important; /* Rich branding deep emerald green */
+}
+
+body.light-mode .experience-tooltip-desc {
+  color: #272732 !important; /* High-contrast readable carbon copy weight */
+}
+
+body.light-mode .experience-tooltip-tri-1 {
+  border-top-color: #ffffff !important;
+}
+
+body.light-mode .experience-tooltip-tri-2 {
+  border-top-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* -----------------------------------------
+   TERMINAL COMMAND & RUN BUTTON CHIPS (LIGHT MODE)
+   ----------------------------------------- */
+body.light-mode .terminal-command-btn {
+  color: #27273a !important;
+  background-color: rgba(0, 0, 0, 0.045) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+body.light-mode .terminal-command-btn:hover {
+  color: #ffffff !important;
+  background-color: #1a1a22 !important;
+  border-color: #1a1a22 !important;
+}
+
+body.light-mode .terminal-run-btn {
+  color: #27273a !important;
+  background-color: rgba(0, 0, 0, 0.045) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+body.light-mode .terminal-run-btn:hover {
+  color: #ffffff !important;
+  background-color: #1a1a22 !important;
+  border-color: #1a1a22 !important;
+}
+
+body.light-mode .terminal-run-btn:hover span,
+body.light-mode .terminal-run-btn:hover svg,
+body.light-mode .terminal-run-btn:hover svg * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
 
 
