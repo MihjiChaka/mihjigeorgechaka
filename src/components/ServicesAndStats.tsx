@@ -132,7 +132,7 @@ export default function ServicesAndStats() {
               {customImage || !imgError ? (
                 <img 
                   id="pillars-avatar-img"
-                  src={customImage || "/src/assets/images/pillars_avatar.png"} 
+                  src={customImage || "/src/assets/images/pillars_avatar_1779963581575.png"} 
                   alt="Engineering Pillars & Mission Avatar" 
                   className="w-full h-auto block rounded-xl border border-white/5"
                   onError={() => {
