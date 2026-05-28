@@ -1,116 +1,18 @@
 import React, { useState } from "react";
 import { DEFAULT_SERVICES, DEFAULT_STATS, DEFAULT_BIO, DEFAULT_CERTIFICATIONS, Certification } from "../data";
-import { MoveRight, Shield, CheckCircle, Award, Terminal, Cloud, ShieldCheck, Cpu, Network, Upload, RefreshCw } from "lucide-react";
+import { MoveRight, Shield, CheckCircle, Award, Terminal, Cloud, ShieldCheck, Cpu, Network } from "lucide-react";
 import defaultAvatarImg from "../assets/images/pillars_avatar_1779963581575.png";
 
 export default function ServicesAndStats() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [activeSpec, setActiveSpec] = useState<number>(0);
 
-  const [customImage, setCustomImage] = useState<string | null>(() => {
+  const [customImage] = useState<string | null>(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("pillars_avatar_custom");
     }
     return null;
   });
-  const [imgError, setImgError] = useState(false);
-
-  const isDevOrPreview = typeof window !== "undefined" && (
-    window.location.hostname === "localhost" ||
-    window.location.hostname.includes("127.0.0.1") ||
-    window.location.hostname.includes("-dev-") ||
-    window.location.hostname.includes("-pre-")
-  );
-
-  const [isDragging, setIsDragging] = useState(false);
-
-  const processFile = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const MAX_WIDTH = 400;
-        const MAX_HEIGHT = 400;
-        let width = img.width;
-        let height = img.height;
-
-        if (width > height) {
-          if (width > MAX_WIDTH) {
-            height *= MAX_WIDTH / width;
-            width = MAX_WIDTH;
-          }
-        } else {
-          if (height > MAX_HEIGHT) {
-            width *= MAX_HEIGHT / height;
-            height = MAX_HEIGHT;
-          }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          ctx.drawImage(img, 0, 0, width, height);
-          // Compress to JPEG with medium-high quality to ensure small payload (~30KB)
-          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.8);
-          
-          try {
-            localStorage.setItem("pillars_avatar_custom", compressedBase64);
-          } catch (error) {
-            console.warn("Could not save to localStorage, falling back to session state", error);
-          }
-          
-          setCustomImage(compressedBase64);
-          setImgError(false);
-        }
-      };
-      img.src = event.target?.result as string;
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-
-  const handleDragEnter = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      processFile(file);
-    }
-  };
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      processFile(file);
-    }
-  };
-
-  const handleResetImage = () => {
-    localStorage.removeItem("pillars_avatar_custom");
-    setCustomImage(null);
-    setImgError(false);
-  };
 
   const specialties = [
     {
@@ -164,83 +66,15 @@ export default function ServicesAndStats() {
             <h2 className="font-mono text-xs uppercase tracking-widest text-white/40 font-bold">
               Engineering Pillars & Mission
             </h2>
-            <div 
-              id="pillars-avatar-container" 
-              className={`max-w-[200px] sm:max-w-[240px] relative rounded-xl transition-all duration-300 ${
-                isDragging 
-                  ? "scale-[1.02] ring-2 ring-emerald-500/50 ring-offset-2 ring-offset-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.3)] bg-emerald-500/5" 
-                  : ""
-              }`}
-              onDragOver={handleDragOver}
-              onDragEnter={handleDragEnter}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-            >
+            <div id="pillars-avatar-container" className="max-w-[200px] sm:max-w-[240px]">
               <div className="relative overflow-hidden rounded-xl">
-                {customImage || !imgError ? (
-                  <img 
-                    id="pillars-avatar-img"
-                    src={customImage || defaultAvatarImg} 
-                    alt="Engineering Pillars & Mission Avatar" 
-                    className="w-full h-auto block rounded-xl border border-white/5"
-                    onError={() => {
-                      if (!customImage) {
-                        setImgError(true);
-                      }
-                    }}
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <div className="w-full aspect-square rounded-xl border border-white/10 bg-zinc-950/40 hover:bg-zinc-900/40 flex flex-col items-center justify-center p-6 text-center transition duration-300">
-                    <Cpu className="w-8 h-8 text-emerald-500/60 mb-3 animate-[pulse_3s_infinite]" />
-                    <span className="font-mono text-[9px] text-white/40 uppercase tracking-widest font-bold">
-                      Awaiting Profile Avatar
-                    </span>
-                    <span className="font-sans text-[8px] text-emerald-500/50 mt-1 max-w-[140px]">
-                      Upload a photo using the button below or drag & drop it here
-                    </span>
-                  </div>
-                )}
-
-                {/* Drag overlay overlaying the profile picture */}
-                {isDragging && (
-                  <div className="absolute inset-0 bg-emerald-950/80 backdrop-blur-[2px] border-2 border-dashed border-emerald-500/50 rounded-xl flex flex-col items-center justify-center p-4 text-center z-10 pointer-events-none select-none animate-fade-in">
-                    <Upload className="w-6 h-6 text-emerald-400 mb-1 animate-bounce" />
-                    <span className="font-mono text-[9px] text-white uppercase tracking-widest font-bold block">
-                      Drop to Upload
-                    </span>
-                    <span className="font-sans text-[7px] text-white/50 mt-0.5 block">
-                      Image File
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Custom Image Uploader */}
-              <div className="flex flex-col gap-1.5 w-full mt-3 select-none">
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  className="hidden" 
-                  onChange={handleImageUpload} 
-                  id="pillar-image-uploader" 
+                <img 
+                  id="pillars-avatar-img"
+                  src={customImage || defaultAvatarImg} 
+                  alt="Engineering Pillars & Mission Avatar" 
+                  className="w-full h-auto block rounded-xl border border-white/5"
+                  referrerPolicy="no-referrer"
                 />
-                <label 
-                  htmlFor="pillar-image-uploader" 
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 font-mono text-[9px] uppercase tracking-wider font-bold text-white bg-emerald-500/10 hover:bg-emerald-500/20 active:bg-emerald-500/25 border border-emerald-500/20 hover:border-emerald-500/30 rounded-lg transition-all cursor-pointer min-h-[30px]"
-                >
-                  <Upload className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Upload or Drag Photo</span>
-                </label>
-                {customImage && (
-                  <button
-                    onClick={handleResetImage}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1 font-mono text-[9px] uppercase tracking-wider font-bold text-white/60 hover:text-white bg-white/5 hover:bg-white/10 active:bg-white/15 border border-white/10 rounded-lg transition-all cursor-pointer min-h-[26px]"
-                  >
-                    <RefreshCw className="w-3 h-3 text-white/45 animate-spin-slow" />
-                    <span>Reset to Default</span>
-                  </button>
-                )}
               </div>
             </div>
           </div>
