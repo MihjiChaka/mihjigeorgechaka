@@ -193,8 +193,12 @@ export default function ProjectList() {
           {DEFAULT_PROJECTS.map((project, index) => {
             const isExpanded = expandedProjectId === project.id;
             return (
-              <div
+              <motion.div
                 key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.65, ease: [0.215, 0.61, 0.355, 1] }}
                 className="group border-b border-white/10 pb-16 last:border-0"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -304,7 +308,7 @@ export default function ProjectList() {
                   </AnimatePresence>
                 </div>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>
