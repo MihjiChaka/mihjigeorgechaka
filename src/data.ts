@@ -331,6 +331,9 @@ export const DEFAULT_TESTIMONIALS: Testimonial[] = [
   }
 ];
 
+// Desktop Portfolio URL (Change this to your actual desktop-like portfolio link when ready)
+export const DESKTOP_PORTFOLIO_URL = "https://github.com/mihjichaka";
+
 export const SOCIALS: SocialLink[] = [
   { id: "linkedin", name: "LinkedIn", url: "https://www.linkedin.com/in/mihji-george-chaka-72a8a1221/", label: "li" },
   { id: "github", name: "Hub", url: "https://github.com/mihjichaka", label: "git" },

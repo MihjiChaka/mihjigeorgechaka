@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { SOCIALS } from "../data";
-import { Menu, X, Mail, Sun, Moon, Download } from "lucide-react";
+import { SOCIALS, DESKTOP_PORTFOLIO_URL } from "../data";
+import { Menu, X, Mail, Sun, Moon, Download, Monitor } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { generateCV } from "../utils/cvGenerator";
 
@@ -122,6 +122,17 @@ export default function Header({ activeSection, onNavigate, theme, onToggleTheme
               </motion.div>
             </button>
 
+            {/* Desktop OS Portfolio Button */}
+            <a
+              href={DESKTOP_PORTFOLIO_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-wider rounded-lg transition-all active:scale-95 duration-200 flex items-center gap-2 shadow-xs hover:shadow-emerald-950/20"
+            >
+              <Monitor className="w-3.5 h-3.5" />
+              <span>Desktop OS</span>
+            </a>
+
             <a
               href="mailto:hello@mihjichaka.design"
               className="px-4 py-2 bg-white hover:bg-zinc-200 text-neutral-950 font-mono text-xs uppercase tracking-wider rounded-lg transition-all active:scale-95 duration-200 flex items-center gap-2 shadow-sm"
@@ -190,6 +201,18 @@ export default function Header({ activeSection, onNavigate, theme, onToggleTheme
                 </button>
               ))}
             </div>
+
+            {/* Desktop Portfolio Link on Mobile */}
+            <a
+              href={DESKTOP_PORTFOLIO_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full mb-3 py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center gap-2 text-white font-bold uppercase text-xs tracking-wider transition-all active:scale-95 shadow-xs"
+            >
+              <Monitor className="w-4 h-4 text-emerald-400" />
+              <span>Launch Desktop OS</span>
+            </a>
 
             {/* Download CV Mobile Button */}
             <button

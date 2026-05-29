@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { DEFAULT_BIO } from "../data";
+import { DEFAULT_BIO, DESKTOP_PORTFOLIO_URL } from "../data";
 import { AvatarDefault } from "./DefaultVisuals";
 import TerminalSimulator from "./TerminalSimulator";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowDownRight, Database, Network, Code2, Download } from "lucide-react";
+import { ArrowDownRight, Database, Network, Code2, Download, Monitor } from "lucide-react";
 import { generateCV } from "../utils/cvGenerator";
 import { DataStreamFlow } from "./DataStreamFlow";
 
@@ -110,6 +110,16 @@ export default function Hero({ theme = "dark" }: HeroProps) {
               <Download className="w-3 h-3" />
               <span>Download CV</span>
             </button>
+
+            <a
+              href={DESKTOP_PORTFOLIO_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 text-indigo-400 hover:text-indigo-300 font-mono text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 cursor-pointer shadow-md shadow-indigo-950/10"
+            >
+              <Monitor className="w-3.5 h-3.5 animate-pulse" />
+              <span>Desktop OS Portfolio</span>
+            </a>
           </div>
 
         </div>

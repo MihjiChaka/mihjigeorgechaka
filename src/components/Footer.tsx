@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SOCIALS, CHANNELS, DEFAULT_BIO } from "../data";
+import { SOCIALS, CHANNELS, DEFAULT_BIO, DESKTOP_PORTFOLIO_URL } from "../data";
 import { Copy, Check, ArrowUpRight, Github, Send } from "lucide-react";
 
 export default function Footer() {
@@ -69,6 +69,18 @@ export default function Footer() {
               SOCIAL CHANNELS
             </h4>
             <ul className="space-y-2 font-mono">
+              <li>
+                <a
+                  href={DESKTOP_PORTFOLIO_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-emerald-400 text-emerald-400 font-bold transition-colors flex items-center gap-1 group"
+                >
+                  <span className="animate-pulse">●</span>
+                  <span>Desktop OS Portfolio</span>
+                  <ArrowUpRight className="w-3 h-3 text-emerald-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                </a>
+              </li>
               {SOCIALS.map((social) => (
                 <li key={social.id}>
                   <a
